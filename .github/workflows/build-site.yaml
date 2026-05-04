@@ -1,0 +1,31 @@
+name: Build Docker image - site
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest ### maquina virtual para rodar o processo de build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Buildar a imagem docker
+        run: |
+          cd site
+          docker build -t meu-site .
+
+      - name: mostrar detalhes da imagem
+        run: |
+          echo "Imagem buildada com sucesso!"
+          docker images meu-site
+          docker inspect meu-site
