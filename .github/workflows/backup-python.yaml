@@ -3,12 +3,15 @@ name: backup arquivo python
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   backup-python:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Backup arquivo python
         run: |
@@ -20,5 +23,5 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "henrique_gmal@hotmail.com"
           git add .
-          git commit -m "Backup do arquivo python criado em $(date +%Y-%m-%d %H:%M:%S)"
-          git push origin main  
+          git commit -m "Backup do arquivo python criado em $(date '+%Y-%m-%d %H:%M:%S')"
+          git push origin main
