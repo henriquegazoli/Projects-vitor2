@@ -20,5 +20,5 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "henrique_gmal@hotmail.com""
           git add .
-          git commit -m "Backup do arquivo python em $(date +%Y-%m-%d %H:%M:%S)"
+          git commit -m "Backup do arquivo python criado"
           git push origin main  
