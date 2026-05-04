@@ -59,10 +59,10 @@ jobs:
           (github.event_name == 'workflow_dispatch' && github.event.inputs.projeto == 'aplicacao-python' && github.event.inputs.ambiente == 'dev')
         run: |
           cd aplicacao-python
-          docker build -t minha-imagem-python:${{ github.event.inputs.ambiente }} .
+          docker build -t minha-imagem-python:${{ github.event.inputs.ambiente || 'dev'}} .
           echo "Imagem Python buildada!"
-          docker images minha-imagem-python:${{ github.event.inputs.ambiente }}
-          docker inspect minha-imagem-python:${{ github.event.inputs.ambiente }}
+          docker images minha-imagem-python:${{ github.event.inputs.ambiente || 'dev'}}
+          docker inspect minha-imagem-python:${{ github.event.inputs.ambiente || 'dev'}}
 
       - name: Build site
         if: |
@@ -70,7 +70,7 @@ jobs:
           (github.event_name == 'workflow_dispatch' && github.event.inputs.projeto == 'site' && github.event.inputs.ambiente == 'dev')
         run: |
           cd site
-          docker build -t meu-site:${{ github.event.inputs.ambiente }} .
+          docker build -t meu-site:${{ github.event.inputs.ambiente || 'dev'}} .
           echo "Imagem do site buildada!"
-          docker images meu-site:${{ github.event.inputs.ambiente }}
-          docker inspect meu-site:${{ github.event.inputs.ambiente }}
+          docker images meu-site:${{ github.event.inputs.ambiente || 'dev'}}
+          docker inspect meu-site:${{ github.event.inputs.ambiente || 'dev'}}
