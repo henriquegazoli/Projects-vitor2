@@ -55,8 +55,8 @@ jobs:
 
       - name: Build aplicacao-python
         if: |
-          steps.changes.outputs.python == 'true' ||
-          (github.event_name == 'workflow_dispatch' && github.event.inputs.projeto == 'aplicacao-python' && github.event.inputs.ambiente == 'dev')
+          (github.event_name != 'workflow_dispatch' && steps.changes.outputs.python == 'true') ||
+          (github.event_name == 'workflow_dispatch' && github.event.inputs.projeto == 'aplicacao-python')
         run: |
           cd aplicacao-python
           docker build -t minha-imagem-python:${{ github.event.inputs.ambiente || 'dev'}} .
@@ -66,8 +66,8 @@ jobs:
 
       - name: Build site
         if: |
-          steps.changes.outputs.site == 'true' ||
-          (github.event_name == 'workflow_dispatch' && github.event.inputs.projeto == 'site' && github.event.inputs.ambiente == 'dev')
+          (github.event_name != 'workflow_dispatch' && steps.changes.outputs.site == 'true') ||
+          (github.event_name == 'workflow_dispatch' && github.event.inputs.projeto == 'site')
         run: |
           cd site
           docker build -t meu-site:${{ github.event.inputs.ambiente || 'dev'}} .
