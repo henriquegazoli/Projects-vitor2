@@ -12,6 +12,16 @@ on:
     paths:
       - 'aplicacao-python/**'   
   workflow_dispatch:
+    inputs:
+      ambiente:
+        description: 'Ambiente de build (dev, staging, prod)'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
 
 jobs:
   build:
@@ -26,10 +36,10 @@ jobs:
       - name: Buildar a imagem docker
         run: |
           cd aplicacao-python
-          docker build -t minha-imagem-python .
+          docker build -t minha-imagem-python:${{ github.event.inputs.ambiente }} .
 
       - name: mostrar detalhes da imagem
         run: |
           echo "Imagem buildada com sucesso!"
-          docker images minha-imagem-python
-          docker inspect minha-imagem-python          
+          docker images minha-imagem-python:${{ github.event.inputs.ambiente }}
+          docker inspect minha-imagem-python:${{ github.event.inputs.ambiente }}       
