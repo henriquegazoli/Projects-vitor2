@@ -25,7 +25,7 @@ jobs:
 
       - name: Buildar a imagem docker
         run: |
-          cd aplicacao-python2
+          cd aplicacao-python
           docker build -t minha-imagem-python .
 
       - name: mostrar detalhes da imagem
