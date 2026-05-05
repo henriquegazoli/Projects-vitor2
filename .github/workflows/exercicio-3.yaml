@@ -1,0 +1,45 @@
+name: Exercicio 1
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest ### maquina virtual para rodar o processo de build
+    steps:
+      - name: checkout do codigo
+        uses: actions/checkout@v4
+
+      - name: Mostre o conteudo README.md, se existir
+        run: |
+          cat README.md
+      - name: Moste o conteudo do Dockerflile, se existir
+        run: |
+          cat Dockerfile  
+
+      - name: Se existir um arquivo README.md ou Dockerfile mostre uma mensagem de Sucesso
+        run: |
+          if [ -f README.md ] || [ -f Dockerfile ];then
+            echo "Arquivo README.md ou Dockerfile encontrado!"
+          else
+            echo "Nenhum arquivo README.md ou Dockerfile encontrado."
+          fi            
+
+      - name: Se não existrir um arquivo README.md ou Dockerfile mostre uma mensagem de não encontrado
+        run: |
+          if [ ! -f README.md ] || [ ! -f Dockerfile ];then
+            echo "Nenhum arquivo README.md ou Dockerfile foi encontrado."
+            exit 1
+          else
+            echo "Arquivo README.md ou Dockerfile foi encontrado!"
+          fi    
+                      
+
+      
+             
+
+
+      
