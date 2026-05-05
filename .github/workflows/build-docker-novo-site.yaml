@@ -1,39 +1,41 @@
-name: Build Docker image
+name: Build Docker novo-site
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'novo-site/**'
+      - 'novo-site/index.html'
+      - 'novo-site/style.css'
+      - 'novo-site/script.js'
+      - 'novo-site/Dockerfile'
+      - '.github/workflows/build-docker-novo-site.yaml'
   workflow_dispatch:
     inputs:
+      ambiente:
+        description: 'Ambiente de build (dev, staging, prod)'
+        required: true
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
 
 jobs:
   build:
-    runs-on: ubuntu-latest ### maquina virtual para rodar o processo de build
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
-      - name: Detectar mudanças nos projetos
-        id: changes
-        uses: dorny/paths-filter@v3
-        with:
-          filters: |
-            novo-site:
-              - 'novo-site/**'
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Build novo-site
-        if: |
-          (github.event_name != 'workflow_dispatch' && steps.changes.outputs.site == 'true') ||
-          (github.event_name == 'workflow_dispatch' && github.event.inputs.projeto == 'site')
         run: |
-          cd site
-          docker build -t meu-site:${{ github.event.inputs.ambiente || 'dev'}} .
-          echo "Imagem do site buildada!"
-          docker images meu-site:${{ github.event.inputs.ambiente || 'dev'}}
-          docker inspect meu-site:${{ github.event.inputs.ambiente || 'dev'}}
+          cd novo-site
+          docker build -t meu-novo-site:${{ github.event.inputs.ambiente || 'dev' }} .
+          echo "Imagem do novo-site buildada!"
+          docker images meu-novo-site:${{ github.event.inputs.ambiente || 'dev' }}
+          docker inspect meu-novo-site:${{ github.event.inputs.ambiente || 'dev' }}
