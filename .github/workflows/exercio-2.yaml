@@ -1,0 +1,31 @@
+name: Exercicio 2
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest ### maquina virtual para rodar o processo de build
+    steps:
+      - name: checkout do codigo
+        uses: actions/checkout@v4
+
+      - name: Pasta chamada saida
+        run: |
+          mkdir saida
+
+      - name: Criar um arquivo relatorio.txt
+        run: |
+          touch saida/relatorio.txt
+          echo ${{ github.repository }} >> saida/relatorio.txt
+          echo ${{ github.ref_name }} >> saida/relatorio.txt
+          
+      - name: Mostre o conteudo deste arquino no log  
+        run: |
+          cat relatorio.txt    
+
+
+      
