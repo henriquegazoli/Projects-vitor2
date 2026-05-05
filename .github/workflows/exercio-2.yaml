@@ -25,7 +25,7 @@ jobs:
           
       - name: Mostre o conteudo deste arquino no log  
         run: |
-          cat relatorio.txt    
+          cat saida/relatorio.txt    
 
 
       
