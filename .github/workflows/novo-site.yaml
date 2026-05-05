@@ -15,4 +15,8 @@ jobs:
           fetch-depth: 0
 
       - name: Novo site 
+        run: Novo site
+
+        
+    
         
