@@ -36,9 +36,18 @@ jobs:
           else
             echo "Nenhum arquivo README.md ou Dockerfile encontrado."
           fi                      
-          
-             
-                      
+
+      - name: Se existir algum dos arquivos README.md ou Dockerfile mostre o conteudo do arquivo encontrado
+        run: |
+          if [ -f README.md ];then
+            echo "Conteudo do README.md:"
+            cat README.md
+          fi
+
+          if [ -f Dockerfile ];then
+            echo "Conteudo do Dockerfile:"
+            cat Dockerfile
+          fi                      
 
       
              
