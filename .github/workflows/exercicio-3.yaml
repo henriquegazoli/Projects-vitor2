@@ -13,12 +13,21 @@ jobs:
       - name: checkout do codigo
         uses: actions/checkout@v4
 
-      - name: Mostre o conteudo README.md, se existir
+      - name: Verifique se existe README.md.
         run: |
-          cat README.md
-      - name: Moste o conteudo do Dockerflile, se existir
+          if [ -f README.md ];then
+            echo "Arquivo README.md encontrado!"
+          else
+            echo "Nenhum arquivo README.md encontrado."
+          fi
+      
+      - name: Verifique se existe Dockerfile, se existir
         run: |
-          cat Dockerfile  
+          if [ -f Dockerfile ];then
+            echo "Arquivo Dockerfile encontrado!"
+          else
+            echo "Nenhum arquivo Dockerfile encontrado."
+          fi  
 
       - name: Se existir um arquivo README.md ou Dockerfile mostre uma mensagem de Sucesso
         run: |
@@ -26,16 +35,9 @@ jobs:
             echo "Arquivo README.md ou Dockerfile encontrado!"
           else
             echo "Nenhum arquivo README.md ou Dockerfile encontrado."
-          fi            
-
-      - name: Se não existrir um arquivo README.md ou Dockerfile mostre uma mensagem de não encontrado
-        run: |
-          if [ ! -f README.md ] || [ ! -f Dockerfile ];then
-            echo "Nenhum arquivo README.md ou Dockerfile foi encontrado."
-            exit 1
-          else
-            echo "Arquivo README.md ou Dockerfile foi encontrado!"
-          fi    
+          fi                      
+          
+             
                       
 
       
