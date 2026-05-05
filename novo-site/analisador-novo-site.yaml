@@ -1,0 +1,27 @@
+name: Analisador Novo site
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  analisar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Mostrar arquivos alterados
+        run: |
+          echo "=== Pull Request #${{ github.event.pull_request.number }} ==="
+          echo "Branch origem: ${{ github.head_ref }}"
+          echo "Branch destino: ${{ github.base_ref }}"
+          echo ""
+          echo "=== Arquivos alterados ==="
+          git diff --name-status origin/${{ github.base_ref }}...HEAD
+          echo ""
+          echo "=== Total de arquivos alterados ==="
+          git diff --name-only origin/${{ github.base_ref }}...HEAD | wc -l

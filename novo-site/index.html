@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechStore - Loja Virtual</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container header-content">
+      <h1 class="logo">Tech<span>Store</span></h1>
+      <nav class="nav">
+        <a href="#produtos">Produtos</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <button class="cart-btn" id="cartBtn">
+        🛒 Carrinho (<span id="cartCount">0</span>)
+      </button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h2>Tecnologia de ponta com os melhores preços</h2>
+      <p>Frete grátis para todo o Brasil em compras acima de R$ 199</p>
+      <a href="#produtos" class="btn-primary">Ver produtos</a>
+    </div>
+  </section>
+
+  <main class="container" id="produtos">
+    <h2 class="section-title">Nossos Produtos</h2>
+    <div class="products" id="products"></div>
+  </main>
+
+  <aside class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h3>Seu Carrinho</h3>
+      <button class="close-btn" id="closeCart">✕</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-footer">
+      <p class="cart-total">Total: <span id="cartTotal">R$ 0,00</span></p>
+      <button class="btn-primary" id="checkoutBtn">Finalizar Compra</button>
+    </div>
+  </aside>
+  <div class="overlay" id="overlay"></div>
+
+  <footer class="footer" id="contato">
+    <div class="container">
+      <p>&copy; 2026 TechStore - Todos os direitos reservados</p>
+      <p>contato@techstore.com | (11) 99999-9999</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
