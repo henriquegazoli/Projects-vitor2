@@ -38,7 +38,7 @@ jobs:
         id: tag
         run: |
           AMBIENTE="${{ github.event.inputs.ambiente || 'dev' }}"
-          TAG="${AMBIENTE}-$(date +%Y%m%d%H%M%S)-${GITHUB_SHA::7}"
+          TAG="${AMBIENTE}-$(date +%Y%m%d%H%M%S)-${GITHUB_SHA}"
           echo "tag=$TAG" >> $GITHUB_OUTPUT
           echo "image=meu-novo-site:$TAG" >> $GITHUB_OUTPUT
 
@@ -63,6 +63,6 @@ jobs:
           git config user.name "jose vitor"
           git config user.email "4jose.vitor.oliveira.jvo@gmail.com"
           git add relatorio-build.txt
-          git diff --cached --quiet || git commit -m "chore: atualiza relatorio-build com ${{ steps.tag.outputs.image }} [skip ci]"
+          git commit -m "chore: atualiza relatorio-build com ${{ steps.tag.outputs.image }}"
           git push
 
