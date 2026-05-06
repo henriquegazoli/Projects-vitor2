@@ -25,6 +25,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -32,10 +34,38 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Gerar tag única
+        id: tag
+        run: |
+          AMBIENTE="${{ github.event.inputs.ambiente || 'dev' }}"
+          TAG="${AMBIENTE}-$(date +%Y%m%d%H%M%S)-${GITHUB_SHA::7}"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "image=meu-novo-site:$TAG" >> $GITHUB_OUTPUT
+
       - name: Build novo-site
         run: |
           cd novo-site
-          docker build -t meu-novo-site:${{ github.event.inputs.ambiente || 'dev' }} .
+          docker build -t ${{ steps.tag.outputs.image }} .
           echo "Imagem do novo-site buildada!"
-          docker images meu-novo-site:${{ github.event.inputs.ambiente || 'dev' }}
-          docker inspect meu-novo-site:${{ github.event.inputs.ambiente || 'dev' }}
+
+      - name: Listar imagem criada
+        run: docker images ${{ steps.tag.outputs.image }}
+
+      - name: Inspecionar imagem
+        run: docker inspect ${{ steps.tag.outputs.image }}
+
+      - name: Atualizar relatorio-build.txt
+        run: |
+          echo "${{ steps.tag.outputs.image }}" >> relatorio-build.txt
+
+      - name: Commit e push do relatório
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add relatorio-build.txt
+          git diff --cached --quiet || git commit -m "chore: atualiza relatorio-build com ${{ steps.tag.outputs.image }}"
+          git push
+
+      - name: commit com [skip ci]  
+        run: |
+          git push     
