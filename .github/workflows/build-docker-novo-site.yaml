@@ -60,8 +60,8 @@ jobs:
 
       - name: Commit e push do relatório
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config user.name "jose vitor"
+          git config user.email "4jose.vitor.oliveira.jvo@gmail.com"
           git add relatorio-build.txt
           git diff --cached --quiet || git commit -m "chore: atualiza relatorio-build com ${{ steps.tag.outputs.image }} [skip ci]"
           git push
