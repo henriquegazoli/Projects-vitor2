@@ -33,6 +33,7 @@ jobs:
           echo "Joining EC2 instance to the workflow..."
           # Comandos para conectar à instância EC2, se necessário
           pwd
+          ls -la
           chmod 400 "docker-vm-key.pem"
           ssh -i "docker-vm-key.pem" ubuntu@ec2-18-116-118-185.us-east-2.compute.amazonaws.com
 
