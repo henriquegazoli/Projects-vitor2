@@ -28,12 +28,13 @@ jobs:
     permissions:
       contents: write
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Acessar EC2
         run: |
           echo "Joining EC2 instance to the workflow..."
           # Comandos para conectar à instância EC2, se necessário
-          pwd
-          ls -la
           chmod 400 "docker-vm-key.pem"
           ssh -i "docker-vm-key.pem" ubuntu@ec2-18-116-118-185.us-east-2.compute.amazonaws.com
 
@@ -41,9 +42,6 @@ jobs:
         run: |
           echo "Testando conexão com a VM..."
           pwd   
-
-      # - name: Checkout repository
-      #   uses: actions/checkout@v4
 
       # - name: Set up Docker Buildx
       #   uses: docker/setup-buildx-action@v3
