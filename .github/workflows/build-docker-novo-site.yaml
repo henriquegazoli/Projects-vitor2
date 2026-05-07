@@ -42,8 +42,7 @@ jobs:
             pwd
             whoami
             docker ps
-          EOF  
-
+          EOF
       # - name: Set up Docker Buildx
       #   uses: docker/setup-buildx-action@v3
 
