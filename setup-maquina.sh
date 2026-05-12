@@ -5,9 +5,11 @@ cd /root/treino-ssh
 
 mkdir -p logs scripts backup
 
-{
-  echo "Data e hora: $(date)"
-  echo "Usuário: $(whoami)"
-  echo "Máquina: $(hostname)"
-  echo "Diretório atual: $(pwd)"
-} > info-maquina.txt
+touch info-maquina.txt
+
+
+date > info-maquina.txt
+whoami >> info-maquina.txt
+hostname >> info-maquina.txt
+pwd >> info-maquina.txt
+cat info-maquina.txt
