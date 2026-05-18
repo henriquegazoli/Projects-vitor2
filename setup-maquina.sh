@@ -1,11 +1,11 @@
 #!/bin/bash
 
-mkdir -p /root/treino-ssh
-cd /root/treino-ssh
+mkdir treino.ssh
+cd treino.ssh
 
-mkdir -p logs scripts backup
+mkdir logs scripts backup
 
-touch info-maquina.txt
+touch info-maquina.txt          
 
 
 date > info-maquina.txt
