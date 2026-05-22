@@ -1,0 +1,31 @@
+name: Deploy cadastro-de-usuarios
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'cadastro-de-usuarios/**'
+      - '.github/workflows/deploy-cadastro.yml'
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    steps:
+      - name: Checkout do codigo
+        uses: actions/checkout@v4
+
+      - name: Parar containers antigos
+        working-directory: cadastro-de-usuarios
+        run: docker compose down || true
+
+      - name: Build e subir containers
+        working-directory: cadastro-de-usuarios
+        run: docker compose up -d --build
+
+      - name: Verificar status
+        working-directory: cadastro-de-usuarios
+        run: docker compose ps
+
+      - name: Limpar imagens antigas (libera disco)
+        run: docker image prune -f
