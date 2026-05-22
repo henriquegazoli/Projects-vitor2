@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: cadastro-db
+    environment:
+      POSTGRES_DB: usuarios
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: $db_password
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+
+  backend:
+    build: ./backend
+    container_name: cadastro-backend
+    environment:
+      DB_HOST: db
+      DB_USER: admin
+      DB_PASSWORD: $db_password
+      DB_NAME: usuarios
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: cadastro-frontend
+    ports:
+      - "8081:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  pgdata:
