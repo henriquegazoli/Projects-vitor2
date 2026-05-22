@@ -38,3 +38,7 @@ services:
 
 volumes:
   pgdata:
+
+networks:
+  default:
+    driver: bridge  
