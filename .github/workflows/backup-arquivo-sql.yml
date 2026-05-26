@@ -30,3 +30,4 @@ jobs:
         run: |
           cd ~/backups-postgres
           rm -rf *
+          
