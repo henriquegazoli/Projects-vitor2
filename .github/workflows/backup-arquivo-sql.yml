@@ -30,5 +30,3 @@ jobs:
         run: |
           cd ~/backups-postgres
           rm -rf *
-
-          aws s3 rm s3://backups-db-cadastro-de-usuarios/backup-*.sql --region us-east-2 --recursive --older-than 30d
