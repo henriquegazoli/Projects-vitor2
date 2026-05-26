@@ -25,3 +25,10 @@ jobs:
         run: |
           aws s3 cp ~/backups-postgres/${{ steps.nome.outputs.arquivo_sql }} \
             s3://backups-db-cadastro-de-usuarios/ --region us-east-2
+
+      - name: Limpar backup antigos
+        run: |
+          cd ~/backups-postgres
+          rm -rf *
+
+          aws s3 rm s3://backups-db-cadastro-de-usuarios/backup-*.sql --region us-east-2 --recursive --older-than 30d
