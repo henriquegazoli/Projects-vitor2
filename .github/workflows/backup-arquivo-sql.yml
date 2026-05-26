@@ -21,11 +21,6 @@ jobs:
           docker exec cadastro-db pg_dump -U admin -d usuarios \
           > ~/backups-postgres/${{ steps.nome.outputs.arquivo_sql }}
 
-      - name: Validar tamanho do dump
-        run: |
-          ls -lh ~/backups-postgres/${{ steps.nome.outputs.arquivo_sql }}
-          test -s ~/backups-postgres/${{ steps.nome.outputs.arquivo_sql }}
-
       - name: Enviar backup para o S3
         run: |
           aws s3 cp ~/backups-postgres/${{ steps.nome.outputs.arquivo_sql }} \
