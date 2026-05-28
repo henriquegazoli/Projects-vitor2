@@ -1,20 +1,33 @@
 variable "aws_region" {
   description = "Região da AWS onde o bucket será criado"
   type        = string
-  default     = "us-east-2"
+  default = "us-east-2"
 }
 
 variable "bucket_name1" {
   description = "Nome global único do bucket S3"
   type        = string
-  default     = "bucket-terraform-123456789"
+  default = "bucket-terraform-dev-1"
 }
 
 variable "bucket_name2" {
   description = "Nome global único do bucket S3"
   type        = string
-  default     = "bucket-terraform-987654321"
+  default = "bucket-terraform-dev-2"
 }
+
+variable "bucket_name3" {
+  description = "Nome global único do bucket S3"
+  type        = string
+  default = "bucket-terraform-dev-3"
+}
+
+variable "bucket_name4" {
+  description = "Nome global único do bucket S3"
+  type        = string
+  default = "bucket-terraform-dev-4"  
+}
+
 
 variable "tag_projeto" {
   description = "Tag do projeto para os recursos"
