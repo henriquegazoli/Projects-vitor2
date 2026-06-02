@@ -15,13 +15,7 @@ resource "aws_s3_bucket" "bucket2" {
   }
 }
 
-resource "aws_s3_bucket" "bucket3" {
-  bucket = var.bucket_name3
-  tags = {
-    Projeto = var.tag_projeto
-    bucket = "bucket3"
-  }
-}
+
 ### EC2
 resource "aws_security_group" "allow_tls" {
   name        = "allow_tls"
